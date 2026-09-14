@@ -23,7 +23,7 @@ jobs:
           dotnet-version: '9.0.x' # Match jouw .NET versie
 
       - name: Publish app
-        run: dotnet publish JouwProjectNaam.csproj -c Release -p:GHPages=true -o release_output
+        run: dotnet publish SofieNoraCampusBlazor.csproj -c Release -p:GHPages=true -o release_output
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
