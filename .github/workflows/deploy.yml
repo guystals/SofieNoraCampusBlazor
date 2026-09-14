@@ -2,7 +2,7 @@ name: Deploy Blazor WASM to GitHub Pages
 
 on:
   push:
-    branches: [ "master" ] # Or "master", depending on your default branch
+    branches: [ "master" ] # Pas dit aan naar "main" als je repository-branch zo heet
   workflow_dispatch:
 
 permissions:
@@ -20,14 +20,16 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x' # Match your target .NET version
+          dotnet-version: '9.0.x' # Match jouw .NET versie
 
       - name: Publish app
-        run: dotnet publish YourProjectName.csproj -c Release -p:GHPages=true -o release_output
+        run: dotnet publish JouwProjectNaam.csproj -c Release -p:GHPages=true -o release_output
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: release_output/wwwroot
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: release_output/wwwroot
-          force_orphan: true
+        id: deployment
+        uses: actions/deploy-pages@v4
