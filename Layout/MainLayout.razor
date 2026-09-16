@@ -1,13 +1,23 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
+    <div class="navigation">
         <NavMenu />
     </div>
-
+    <div class="header1">Shool administration / @currentDate</div>
+    <div class="header2"><strong>Administrator: @adminName</strong></div>
     <main>
         <article class="content px-4">
             @Body
         </article>
     </main>
+    <footer>
+        <p>&copy; 2023 School Administration. All rights reserved.</p>
+    </footer>
 </div>
+
+@code {
+    private string currentDate = DateTime.Now.ToString("dd/MM/yyyy");
+
+    private string adminName = "Sofia Carter"; // todo put here login name
+}
